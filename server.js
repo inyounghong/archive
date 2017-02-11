@@ -18,9 +18,14 @@ MongoClient.connect('mongodb://inyounghong:Feliciano7@ds131139.mlab.com:31139/ar
     });
 });
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res) {
-    console.log(__dirname);
     res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/overview', function(req, res) {
+    res.sendFile(__dirname + '/overview.html');
 });
 
 app.get('/data', function(req, res) {
@@ -37,7 +42,7 @@ app.get('/data', function(req, res) {
             }
         },
         { $sort: {count: -1}},
-        { $limit: 70 }
+        { $limit: 50 }
     ]).toArray(function(err, results) {
     // db.collection('harry_potter').find().toArray(function(err, results) {
         console.log(results);
